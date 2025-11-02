@@ -1,8 +1,10 @@
 # Open Chat
 
-## What It Does
+Open-source AI-chat-bot (like ChatGPT) that runs any local or hosted LLM with web search and custom modes to tailor responses
 
-<img align="right" src="media/logo.gif" width="350" alt="Animated logo" />
+## Features
+
+<img align="right" src="media/logo.gif" width="200" alt="Animated logo" />
 
 - **Hybrid AI control in one UI:** Switch between local and hosted models without leaving the chat flow.
 - **OpenRouter = model superhub:** Tap into OpenAI, Anthropic, Google, Qwen, MiniMax, and dozens more through a single key and use their free tiers to prototype fast.
@@ -13,10 +15,11 @@
 
 
 ## Setup
-- Install dependencies: `npm install`.
-- Create a `.env` with `AI_GATEWAY_API_KEY`, `OPENROUTER_API_KEY`, and `LMSTUDIO_BASE_URL=http://localhost:1234/v1`.
-- Start LM Studio with the models you want available (match the names listed under each provider).
-- Run the dev server: `npm run dev`.
+1. Clone: `git clone https://github.com/<org>/open_chat && cd open_chat`.
+2. Install dependencies: `npm install`.
+3. Create a `.env` with `AI_GATEWAY_API_KEY`, `OPENROUTER_API_KEY`, and `LMSTUDIO_BASE_URL=http://localhost:1234/v1`.
+4. Start LM Studio with the models you want available (match the names listed under each provider).
+5. Run the dev server: `npm run dev`.
 
 ### LM Studio Default Model
 - Default local model: `mlx-community/LFM2-2.6B-4bit`. In LM Studio, search for this model, download it, then hit **Serve** so it runs on `http://localhost:1234/v1` (see [LM Studio docs](https://lmstudio.ai/docs/developer) for details).
@@ -38,3 +41,7 @@
 - Keep the instructions clear and scannable: define the tone, outline the response structure (bullets, summaries, steps), and give 1-2 concrete dos/don’ts so the model stays on brief.
 - Pick an icon by matching any entry from the Lucide icon list (https://lucide.dev/icons) or by browsing `node_modules/lucide-react`, then drop the plain name into the `icon` field.
 - Restart the dev server or reload the page so the cache in `prompts-server` picks up the new file.
+
+## Limitations/Future Improvements
+- [ ] Persistent storage
+- [ ] MCP support
