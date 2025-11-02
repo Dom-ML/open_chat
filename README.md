@@ -1,6 +1,6 @@
 # Open Chat
 
-Open-source AI-chat-bot (like ChatGPT) that runs any local or hosted LLM with web search and custom modes to tailor responses
+Open-source AI-chat-bot: an open-source version of ChatGPT that runs any local or hosted LLM with web search and custom modes to tailor responses.
 
 ## Features
 
@@ -14,6 +14,9 @@ Open-source AI-chat-bot (like ChatGPT) that runs any local or hosted LLM with we
 ![App demo](media/AppDemo0.gif)
 
 
+## Prerequisites
+- **LM Studio**: Download the installer for your OS from the official [Downloads page](https://lmstudio.ai/download).
+- **Node.js + npm**: Get the latest LTS release for your OS from the [Downloads page](https://nodejs.org/en/download).
 ## Setup
 1. Clone: `git clone https://github.com/Dom-ML/open_chat.git && cd open_chat`.
 2. Install dependencies: `npm install`.
@@ -31,17 +34,17 @@ Open-source AI-chat-bot (like ChatGPT) that runs any local or hosted LLM with we
 - Prompt modes come from markdown files in `src/prompts`; copy one, edit the front matter, choose any Lucide icon name, and reload to see it.
 - UI helpers for fetching provider data sit in `src/lib/ai-config.ts`, and prompt loading is cached in `src/lib/prompts-server.ts`.
 
-## Tech Stack
+### Tech Stack
 - Next.js app ready for Vercel hosting or local dev.
 - UI layer built with shadcn’s `@ai-elements` components.
 - AI SDK suite: `ai`, `@ai-sdk/react`, `@ai-sdk/openai-compatible`, `@openrouter/ai-sdk-provider`, plus `zod` for validation.
 
-## How to add custom modes
+### How to add custom modes
 - Copy one of the markdown files in `src/prompts`, change the `id` and `name`, and write the persona instructions under the front matter.
 - Keep the instructions clear and scannable: define the tone, outline the response structure (bullets, summaries, steps), and give 1-2 concrete dos/don’ts so the model stays on brief.
 - Pick an icon by matching any entry from the Lucide icon list (https://lucide.dev/icons) or by browsing `node_modules/lucide-react`, then drop the plain name into the `icon` field.
 - Restart the dev server or reload the page so the cache in `prompts-server` picks up the new file.
 
-## Limitations/Future Improvements
+### Limitations/Future Improvements
 - [ ] Persistent storage
 - [ ] MCP support
