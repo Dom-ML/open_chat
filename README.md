@@ -18,6 +18,10 @@
 - Start LM Studio with the models you want available (match the names listed under each provider).
 - Run the dev server: `npm run dev`.
 
+### LM Studio Default Model
+- Default local model: `mlx-community/LFM2-2.6B-4bit`. In LM Studio, search for this model, download it, then hit **Serve** so it runs on `http://localhost:1234/v1` (see [LM Studio docs](https://lmstudio.ai/docs/developer) for details).
+- To swap models later, update the first entry in `modelsByProvider.lmstudio` inside `src/app/api/config/route.ts` so its `value` matches the Serve ID you expose from LM Studio.
+
 ## How It Works
 - Providers live in `src/app/api/config/route.ts`; add models by extending the `modelsByProvider` list for the provider you use.
 - Streaming chat logic is in `src/app/api/chat/route.ts`, which reads your provider choice and system prompt.
