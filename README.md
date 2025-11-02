@@ -4,7 +4,7 @@ Open-source AI-chat-bot (like ChatGPT) that runs any local or hosted LLM with we
 
 ## Features
 
-<img align="right" src="media/logo.gif" width="200" alt="Animated logo" />
+<img align="right" src="media/logo.gif" width="300" alt="Animated logo" />
 
 - **Hybrid AI control in one UI:** Switch between local and hosted models without leaving the chat flow.
 - **OpenRouter = model superhub:** Tap into OpenAI, Anthropic, Google, Qwen, MiniMax, and dozens more through a single key and use their free tiers to prototype fast.
@@ -15,7 +15,7 @@ Open-source AI-chat-bot (like ChatGPT) that runs any local or hosted LLM with we
 
 
 ## Setup
-1. Clone: `git clone https://github.com/<org>/open_chat && cd open_chat`.
+1. Clone: `git clone https://github.com/Dom-ML/open_chat.git && cd open_chat`.
 2. Install dependencies: `npm install`.
 3. Create a `.env` with `AI_GATEWAY_API_KEY`, `OPENROUTER_API_KEY`, and `LMSTUDIO_BASE_URL=http://localhost:1234/v1`.
 4. Start LM Studio with the models you want available (match the names listed under each provider).
