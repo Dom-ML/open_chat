@@ -1,39 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Open Chat
 
-## Getting Started
+<img align="right" src="media/logo.gif" width="140" alt="Animated logo" />
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## What It Does
+- **Hybrid AI control in one UI:** Switch between local and hosted models without leaving the chat flow.
+- **OpenRouter = model superhub:** Tap into OpenAI, Anthropic, Google, Qwen, MiniMax, and dozens more through a single key and use their free tiers to prototype fast.
+- **Offline-first with LM Studio:** Run everything locally by loading compatible models in LM Studio and keeping keys private.
+- **Persona-driven customization:** Drop new prompt files to craft modes tailored to any workflow or teaching style.
+![App demo](media/AppDemo0.gif)
 
 
-Note streaming of structured data is experimental 
+## Setup
+- Install dependencies: `npm install`.
+- Create a `.env` with `AI_GATEWAY_API_KEY`, `OPENROUTER_API_KEY`, and `LMSTUDIO_BASE_URL=http://localhost:1234/v1`.
+- Start LM Studio with the models you want available (match the names listed under each provider).
+- Run the dev server: `npm run dev`.
+
+## How It Works
+- Providers live in `src/app/api/config/route.ts`; add models by extending the `modelsByProvider` list for the provider you use.
+- Streaming chat logic is in `src/app/api/chat/route.ts`, which reads your provider choice and system prompt.
+- Prompt modes come from markdown files in `src/prompts`; copy one, edit the front matter, choose any Lucide icon name, and reload to see it.
+- UI helpers for fetching provider data sit in `src/lib/ai-config.ts`, and prompt loading is cached in `src/lib/prompts-server.ts`.
+
+## Tech Stack
+- Next.js app ready for Vercel hosting or local dev.
+- UI layer built with shadcn’s `@ai-elements` components.
+- AI SDK suite: `ai`, `@ai-sdk/react`, `@ai-sdk/openai-compatible`, `@openrouter/ai-sdk-provider`, plus `zod` for validation.
+
+## Tailor New Modes
+- Copy one of the markdown files in `src/prompts`, change the `id` and `name`, and write the persona instructions under the front matter.
+- Keep the instructions clear and scannable: define the tone, outline the response structure (bullets, summaries, steps), and give 1-2 concrete dos/don’ts so the model stays on brief.
+- Pick an icon by matching any entry from the Lucide icon list (https://lucide.dev/icons) or by browsing `node_modules/lucide-react`, then drop the plain name into the `icon` field.
+- Restart the dev server or reload the page so the cache in `prompts-server` picks up the new file.
