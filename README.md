@@ -1,21 +1,13 @@
 # Open Chat
 
-<table>
-  <tr>
-    <td valign="top" width="70%">
-      <h2>What It Does</h2>
-      <ul>
-        <li><strong>Hybrid AI control in one UI:</strong> Switch between local and hosted models without leaving the chat flow.</li>
-        <li><strong>OpenRouter = model superhub:</strong> Tap into OpenAI, Anthropic, Google, Qwen, MiniMax, and dozens more through a single key and use their free tiers to prototype fast.</li>
-        <li><strong>Offline-first with LM Studio:</strong> Run everything locally by loading compatible models in LM Studio and keeping keys private.</li>
-        <li><strong>Persona-driven customization:</strong> Drop new prompt files to craft modes tailored to any workflow or teaching style.</li>
-      </ul>
-    </td>
-    <td valign="top" align="center" width="30%">
-      <img src="media/logo.gif" width="180" alt="Animated logo" />
-    </td>
-  </tr>
-</table>
+## What It Does
+
+<img align="right" src="media/logo.gif" width="180" alt="Animated logo" />
+
+- **Hybrid AI control in one UI:** Switch between local and hosted models without leaving the chat flow.
+- **OpenRouter = model superhub:** Tap into OpenAI, Anthropic, Google, Qwen, MiniMax, and dozens more through a single key and use their free tiers to prototype fast.
+- **Offline-first with LM Studio:** Run everything locally by loading compatible models in LM Studio and keeping keys private.
+- **Persona-driven customization:** Drop new prompt files to craft modes tailored to any workflow or teaching style.
 
 ![App demo](media/AppDemo0.gif)
 
