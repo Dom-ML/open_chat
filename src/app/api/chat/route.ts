@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     modelConfig = activeModel;
   }
 
-  const systemPrompt = getSystemPrompt(useCase);
+  const systemPrompt = await getSystemPrompt(useCase);
 
   // Stream text response for all modes
   const result = streamText({

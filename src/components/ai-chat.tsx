@@ -32,7 +32,8 @@ import { Action, Actions } from '@/components/ai-elements/actions';
 import { Fragment, useState, useEffect } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { Response } from '@/components/ai-elements/response';
-import { CopyIcon, GlobeIcon, RefreshCcwIcon, MessageSquareIcon, BookOpenIcon, BabyIcon, type LucideIcon } from 'lucide-react';
+import { CopyIcon, GlobeIcon, RefreshCcwIcon } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import {
   Source,
   Sources,
@@ -47,40 +48,15 @@ import {
 import { Loader } from '@/components/ai-elements/loader';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { type Model, type Provider, fetchConfig } from '@/lib/ai-config';
+import { getAllPromptConfigs, type PromptConfig } from '@/lib/prompts';
 import { cn } from '@/lib/utils';
 
 type Mode = 'default' | 'ai-engineer' | 'simple';
 
-interface ModeConfig {
-  value: Mode;
-  name: string;
-  description: string;
-  icon: LucideIcon;
-  color?: string;
+function getIconComponent(iconName: string) {
+  const Icon = (LucideIcons as Record<string, unknown>)[`${iconName}Icon`];
+  return Icon || LucideIcons.MessageSquareIcon;
 }
-
-const MODES: ModeConfig[] = [
-  { 
-    value: 'default', 
-    name: 'Default', 
-    description: 'Standard chat',
-    icon: MessageSquareIcon,
-  },
-  { 
-    value: 'ai-engineer', 
-    name: 'AI Engineer', 
-    description: 'Structured learning from technical content',
-    icon: BookOpenIcon,
-    color: 'ring-blue-500',
-  },
-  { 
-    value: 'simple', 
-    name: 'Simple', 
-    description: 'Easy-to-understand explanations',
-    icon: BabyIcon,
-    color: 'ring-green-500',
-  },
-];
 
 const AIChat = () => {
   const [input, setInput] = useState('');
@@ -90,6 +66,7 @@ const AIChat = () => {
   const [provider, setProvider] = useState<string>('');
   const [webSearch, setWebSearch] = useState(false);
   const [mode, setMode] = useState<Mode>('default');
+  const [modes, setModes] = useState<PromptConfig[]>([]);
   const { messages, sendMessage, status, regenerate } = useChat();
 
   useEffect(() => {
@@ -98,6 +75,10 @@ const AIChat = () => {
       setModel(config.defaultModel || config.models[0]?.value || '');
       setProviders(config.providers);
       setProvider(config.activeProvider || config.providers[0]?.id || '');
+    });
+
+    getAllPromptConfigs().then((promptConfigs) => {
+      setModes(promptConfigs);
     });
   }, []);
 
@@ -305,30 +286,30 @@ const AIChat = () => {
                   ))}
                 </PromptInputModelSelectContent>
               </PromptInputModelSelect>
-              {MODES.map((m) => {
-                const Icon = m.icon;
-                const isActive = mode === m.value;
+              {modes.map((promptConfig) => {
+                const Icon = getIconComponent(promptConfig.metadata.icon);
+                const isActive = mode === promptConfig.metadata.id;
                 
                 return (
-                  <Tooltip key={m.value} delayDuration={200}>
+                  <Tooltip key={promptConfig.metadata.id} delayDuration={200}>
                     <TooltipTrigger asChild>
                       <PromptInputButton
                         variant={isActive ? 'default' : 'ghost'}
                         size="icon-sm"
-                        onClick={() => setMode(m.value)}
+                        onClick={() => setMode(promptConfig.metadata.id as Mode)}
                         className={cn(
                           "relative transition-all duration-200",
                           isActive && "shadow-md"
                         )}
                         title=""
-                        aria-label={`${m.name} mode`}
+                        aria-label={`${promptConfig.metadata.name} mode`}
                       >
                         <Icon className="size-4" />
                         {isActive && (
                           <span 
                             className={cn(
                               "absolute inset-0 rounded-md ring-2 animate-pulse pointer-events-none",
-                              m.color || "ring-primary"
+                              promptConfig.metadata.color || "ring-primary"
                             )}
                             aria-hidden="true"
                           />
@@ -336,8 +317,8 @@ const AIChat = () => {
                       </PromptInputButton>
                     </TooltipTrigger>
                     <TooltipContent side="top" className="max-w-[200px] text-center">
-                      <p className="font-semibold">{m.name}</p>
-                      <p className="text-xs text-background/80 mt-1">{m.description}</p>
+                      <p className="font-semibold">{promptConfig.metadata.name}</p>
+                      <p className="text-xs text-background/80 mt-1">{promptConfig.metadata.description}</p>
                     </TooltipContent>
                   </Tooltip>
                 );
