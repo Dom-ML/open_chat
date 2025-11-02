@@ -2,7 +2,7 @@
 
 ## What It Does
 
-<img align="right" src="media/logo.gif" width="180" alt="Animated logo" />
+<img align="right" src="media/logo.gif" width="350" alt="Animated logo" />
 
 - **Hybrid AI control in one UI:** Switch between local and hosted models without leaving the chat flow.
 - **OpenRouter = model superhub:** Tap into OpenAI, Anthropic, Google, Qwen, MiniMax, and dozens more through a single key and use their free tiers to prototype fast.
@@ -33,7 +33,7 @@
 - UI layer built with shadcn’s `@ai-elements` components.
 - AI SDK suite: `ai`, `@ai-sdk/react`, `@ai-sdk/openai-compatible`, `@openrouter/ai-sdk-provider`, plus `zod` for validation.
 
-## Tailor New Modes
+## How to add custom modes
 - Copy one of the markdown files in `src/prompts`, change the `id` and `name`, and write the persona instructions under the front matter.
 - Keep the instructions clear and scannable: define the tone, outline the response structure (bullets, summaries, steps), and give 1-2 concrete dos/don’ts so the model stays on brief.
 - Pick an icon by matching any entry from the Lucide icon list (https://lucide.dev/icons) or by browsing `node_modules/lucide-react`, then drop the plain name into the `icon` field.
